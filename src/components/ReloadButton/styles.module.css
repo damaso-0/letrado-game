@@ -1,0 +1,47 @@
+.reloadButton {
+  border: none;
+  outline: none;
+  background-color: transparent;
+  cursor: pointer;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  margin: 0;
+  padding: 0;
+
+  transition: background-color 0.1s ease;
+}
+
+.reloadButton svg {
+  width: 30px;
+  height: 30px;
+  fill: #eee;
+}
+
+.reloadButton:hover {
+  background-color: #303030;
+}
+
+.reloadButton:focus {
+  outline: none;
+}
+
+.reloadButtonSpinner {
+  animation: spin 0.5s ease;
+  pointer-events: none;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}

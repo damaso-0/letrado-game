@@ -1,0 +1,21 @@
+{
+  "name": "letrado-game",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "canvas-confetti": "^1.9.3",
+    "preact": "^10.26.5"
+  },
+  "devDependencies": {
+    "@preact/preset-vite": "^2.10.1",
+    "@types/canvas-confetti": "^1.9.0",
+    "typescript": "~5.8.3",
+    "vite": "^6.3.5"
+  }
+}

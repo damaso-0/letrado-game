@@ -1,0 +1,51 @@
+.alert {
+  width: fit-content;
+  padding: 5px 20px;
+
+  text-align: center;
+  font-size: 16px;
+  font-weight: 600;
+  color: #fff;
+
+  background-color: #333;
+  border-radius: 100px;
+
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, -100%);
+
+  animation: slide-down 3s ease;
+}
+
+@keyframes slide-down {
+  0% {
+    transform: translate(-50%, -100%);
+  }
+
+  10% {
+    transform: translate(-50%, 40px);
+  }
+
+  90% {
+    transform: translate(-50%, 40px);
+  }
+
+  100% {
+    transform: translate(-50%, -100%);
+  }
+}
+
+.alertFixed {
+  animation: slide-down-fixed 0.3s ease forwards;
+}
+
+@keyframes slide-down-fixed {
+  0% {
+    transform: translate(-50%, -100%);
+  }
+
+  100% {
+    transform: translate(-50%, 40px);
+  }
+}

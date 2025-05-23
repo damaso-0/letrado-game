@@ -1,0 +1,106 @@
+.letter {
+  width: 60px;
+  height: 60px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  box-sizing: border-box;
+  border-width: 0px;
+  background-color: #1c1c1c;
+  border-radius: 5px;
+
+  font-size: 32px;
+  font-weight: 900;
+  color: #eee;
+  text-transform: uppercase;
+  text-align: center;
+
+  user-select: none;
+
+  transition: border-bottom-width 0.1s ease;
+}
+
+.letterActive {
+  background-color: transparent;
+  border: 3px solid #343434;
+
+  cursor: pointer;
+}
+
+.letterFocused {
+  border-bottom-width: 10px;
+}
+
+.letter_correct {
+  animation: spin-correct 0.5s ease-out forwards;
+  backface-visibility: hidden;
+}
+
+.letter_present {
+  animation: spin-present 0.5s ease-out forwards;
+  backface-visibility: hidden;
+}
+
+.letter_absent {
+  animation: spin-absent 0.5s ease-out forwards;
+  backface-visibility: hidden;
+}
+
+@keyframes spin-correct {
+  0% {
+    transform: perspective(100px) rotateY(0deg);
+    background-color: #1c1c1c;
+  }
+  49% {
+    transform: perspective(100px) rotateY(90deg);
+    background-color: #1c1c1c;
+  }
+  50% {
+    transform: perspective(100px) rotateY(180deg);
+    background-color: #1c1c1c;
+  }
+  100% {
+    transform: perspective(100px) rotateY(360deg);
+    background-color: var(--correct-color);
+  }
+}
+
+@keyframes spin-present {
+  0% {
+    transform: perspective(100px) rotateY(0deg);
+    background-color: #1c1c1c;
+  }
+  49% {
+    transform: perspective(100px) rotateY(90deg);
+    background-color: #1c1c1c;
+  }
+  50% {
+    transform: perspective(100px) rotateY(180deg);
+    background-color: #1c1c1c;
+  }
+  100% {
+    transform: perspective(100px) rotateY(360deg);
+    background-color: var(--present-color);
+  }
+}
+
+@keyframes spin-absent {
+  0% {
+    transform: perspective(100px) rotateY(0deg);
+    background-color: #1c1c1c;
+  }
+  49% {
+    transform: perspective(100px) rotateY(90deg);
+    background-color: #1c1c1c;
+  }
+  50% {
+    transform: perspective(100px) rotateY(180deg);
+    background-color: var(--absent-color);
+  }
+  100% {
+    transform: perspective(100px) rotateY(360deg);
+    background-color: var(--absent-color);
+  }
+}
