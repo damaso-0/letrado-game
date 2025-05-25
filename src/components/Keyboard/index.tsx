@@ -1,16 +1,16 @@
+import GameContext from "../../states/GameContext";
 import { normalizeWord } from "../../service";
+import { useContext } from "preact/hooks";
 import styles from "./styles.module.css";
+import DeleteIcon from "./delete";
 
-interface IKeyboard {
-  words: string[][];
-  correctWord: string;
-}
+const Keyboard = () => {
+  const { attemptWords, correctWord } = useContext(GameContext);
 
-const Keyboard = ({ words, correctWord }: IKeyboard) => {
   const letters = [
     ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"],
-    ["A", "S", "D", "F", "G", "H", "J", "K", "L"],
-    ["Z", "X", "C", "V", "B", "N", "M"],
+    ["A", "S", "D", "F", "G", "H", "J", "K", "L", "delete"],
+    ["Z", "X", "C", "V", "B", "N", "M", "enter"],
   ];
 
   const checkLetterState = (letter: string) => {
@@ -21,7 +21,7 @@ const Keyboard = ({ words, correctWord }: IKeyboard) => {
     let hasCorrect = false;
     let hasBeenTyped = false;
 
-    words.forEach((word) => {
+    attemptWords?.forEach((word) => {
       word.forEach((char, index) => {
         if (normalizeWord(char) === normalizedLetter) {
           hasBeenTyped = true;
@@ -52,9 +52,17 @@ const Keyboard = ({ words, correctWord }: IKeyboard) => {
               className={[
                 styles.keyboardLetter,
                 styles[`letter_${checkLetterState(letter)}`],
+                ...(letter === "delete" ? [styles.keyboardLetterDelete] : []),
+                ...(letter === "enter" ? [styles.keyboardLetterEnter] : []),
               ].join(" ")}
             >
-              {letter}
+              {letter === "delete" ? (
+                <DeleteIcon />
+              ) : letter === "enter" ? (
+                "⏎"
+              ) : (
+                letter
+              )}
             </div>
           ))}
         </div>

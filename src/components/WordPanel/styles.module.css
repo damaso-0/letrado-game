@@ -1,4 +1,7 @@
 .wordPanel {
+  width: 100%;
+  max-width: clamp(100px, 50vh, 400px);
+
   display: flex;
   flex-direction: column;
   gap: 10px;

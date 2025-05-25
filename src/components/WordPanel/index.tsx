@@ -1,32 +1,24 @@
+import { useContext, useEffect, useState } from "preact/hooks";
+import GameContext from "../../states/GameContext";
 import styles from "./styles.module.css";
 import Word from "../Word";
-import { useEffect, useState } from "preact/hooks";
 import {
   checkCorrectWord,
   checkWordExists,
   normalizeWord,
 } from "../../service";
-import type React from "preact/compat";
 
-interface IWordPanel {
-  correctWord: string;
-  attempts: number;
-  gameWon: boolean | null;
-  setGameWon: (gameWon: boolean | null) => void;
-  setMessage: (message: string) => void;
-  attemptWords: string[][];
-  setAttemptWords: React.Dispatch<React.SetStateAction<string[][]>>;
-}
+const WordPanel = () => {
+  const {
+    attempts,
+    attemptWords,
+    setAttemptWords,
+    correctWord,
+    gameWon,
+    setGameWon,
+    setMessage,
+  } = useContext(GameContext);
 
-const WordPanel = ({
-  correctWord,
-  attempts,
-  gameWon,
-  setGameWon,
-  setMessage,
-  attemptWords,
-  setAttemptWords,
-}: IWordPanel) => {
   const [activeAttempt, setActiveAttempt] = useState<string[]>(
     Array(6).fill("")
   );

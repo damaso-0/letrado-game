@@ -1,57 +1,37 @@
-import { useEffect, useState } from "preact/hooks";
-import "./app.css";
+import { useContext, useEffect } from "preact/hooks";
 import WordPanel from "./components/WordPanel";
+import GameContext from "./states/GameContext";
+import { Fragment } from "preact/jsx-runtime";
+import Keyboard from "./components/Keyboard";
 import { getRandomWord } from "./service";
 import Alert from "./components/Alert";
-import Keyboard from "./components/Keyboard";
-import { makeItRain } from "./confetti";
+import "./app.css";
 
-export function App() {
-  const attempts = 7;
-  const [attemptWords, setAttemptWords] = useState<string[][]>(
-    Array.from({ length: attempts }, () => Array(6).fill(""))
-  );
-  const [gameWon, setGameWon] = useState<boolean | null>(null);
-  const [message, setMessage] = useState<string>("");
-  const [word, setWord] = useState<string>("");
+const GameContent = () => {
+  const { setCorrectWord, setAttempts } = useContext(GameContext);
 
-  const generateNewWord = () => getRandomWord().then((word) => setWord(word));
+  const generateNewWord = () => {
+    getRandomWord().then((newWord) => setCorrectWord(newWord));
+    setAttempts(7);
+  };
 
   useEffect(() => {
     generateNewWord();
   }, []);
 
-  useEffect(() => {
-    if (gameWon !== null) {
-      setTimeout(() => setMessage(`Palavra correta: ${word}`), 1200);
-    }
+  return (
+    <Fragment>
+      <Alert />
+      <WordPanel />
+      <Keyboard />
+    </Fragment>
+  );
+};
 
-    if (gameWon) {
-      setTimeout(() => makeItRain(), 1200);
-    }
-  }, [gameWon]);
-
-  useEffect(() => {
-    if (gameWon === null) setTimeout(() => setMessage(""), 3000);
-  }, [message]);
-
+export function App() {
   return (
     <div className="app-container">
-      {message && <Alert message={message} fixed={gameWon !== null} />}
-
-      {/* <ReloadButton onClick={makeItRain} /> */}
-
-      <WordPanel
-        attempts={attempts}
-        attemptWords={attemptWords}
-        setAttemptWords={setAttemptWords}
-        correctWord={word}
-        gameWon={gameWon}
-        setGameWon={setGameWon}
-        setMessage={setMessage}
-      />
-
-      <Keyboard words={attemptWords} correctWord={word} />
+      <GameContent />
     </div>
   );
 }
